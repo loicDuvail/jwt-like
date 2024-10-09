@@ -25,6 +25,8 @@ export const timeStringToInt = (timeString: string) => {
     case "weeks":
       return { status: 200, message: "success", data: scalar * week_ms };
   }
+
+  return { status: 400, message: "invalid time string format", data: null };
 };
 
 export const symetricEncrypt = (data: string, key: string) => {
