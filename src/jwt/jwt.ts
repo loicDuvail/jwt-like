@@ -9,15 +9,7 @@ const sign = (data: object, options: JwtSignOptions, secret: string) => {
   const encryptedDate = symetricEncrypt(new Date().toUTCString(), secret);
   const encryptedExpiresIn = symetricEncrypt(options.expiresIn, secret);
 
-  return (
-    prefix +
-    "." +
-    encryptedData +
-    "." +
-    encryptedDate +
-    "." +
-    encryptedExpiresIn
-  );
+  return [prefix, encryptedData, encryptedDate, encryptedExpiresIn].join(".");
 };
 
 const verify = (token: string, secret: string) => {
