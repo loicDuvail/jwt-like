@@ -2,7 +2,7 @@ import { symetricDecrypt, symetricEncrypt, timeStringToInt } from "./util";
 import * as sha256 from "sha256";
 
 type JwtSignOptions = { expiresIn: string };
-export const sign = (data: object, options: JwtSignOptions, secret: string) => {
+const sign = (data: object, options: JwtSignOptions, secret: string) => {
   const hash = sha256(secret, { asString: true });
   const prefix = symetricEncrypt(hash, secret);
   const encryptedData = symetricEncrypt(JSON.stringify(data), secret);
@@ -20,7 +20,7 @@ export const sign = (data: object, options: JwtSignOptions, secret: string) => {
   );
 };
 
-export const verify = (token: string, secret: string) => {
+const verify = (token: string, secret: string) => {
   const [prefix, encryptedData, encryptedDate, encryptedLifetimeMs] =
     token.split(".");
 
@@ -43,3 +43,6 @@ export const verify = (token: string, secret: string) => {
 
   return { status: 200, message: "valid token", data };
 };
+
+const jwt = { sign, verify };
+export default jwt;
