@@ -1,0 +1,7 @@
+{
+  "include": ["./src/*", "src/jwt/jwt.ts", "src/jwt/util.ts"],
+  "compileOnSave": true,
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
+}
